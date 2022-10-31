@@ -576,7 +576,7 @@ class ComposeViewModel @Inject constructor(
                     // existing draft
                     //
                     // TODO: Show dialog warning user about overwriting draft
-                    if (sharedText.isNotBlank()) {
+                    if (sharedText.isNotEmpty()) {
                         view.setDraft(sharedText)
                     } else {
                         view.setDraft(draft)
@@ -587,7 +587,7 @@ class ComposeViewModel @Inject constructor(
         // an attachment, disable otherwise
         Observables
                 .combineLatest(view.textChangedIntent, attachments) { text, attachments ->
-                    text.isNotBlank() || attachments.isNotEmpty()
+                    text.isNotEmpty() || attachments.isNotEmpty()
                 }
                 .autoDisposable(view.scope())
                 .subscribe { canSend -> newState { copy(canSend = canSend) } }
