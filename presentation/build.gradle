@@ -24,7 +24,6 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
     flavorDimensions "analytics"
 
     defaultConfig {
@@ -61,13 +60,13 @@ android {
         jvmTarget = "1.8"
     }
 
-    lintOptions {
-        abortOnError false
-    }
 
     productFlavors {
         withAnalytics { dimension "analytics" }
         noAnalytics { dimension "analytics" }
+    }
+    lint {
+        abortOnError false
     }
 
     if (System.getenv("CI") == "true") {
@@ -101,6 +100,7 @@ dependencies {
     implementation "androidx.emoji:emoji-appcompat:$androidx_emoji_version"
     implementation "androidx.viewpager2:viewpager2:$androidx_viewpager_version"
     implementation "com.google.android.material:material:$material_version"
+    implementation "io.objectbox:objectbox-android:2.5.0"
 
     // conductor
     implementation "com.bluelinelabs:conductor:$conductor_version"
@@ -152,7 +152,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "com.uber.rxdogtag:rxdogtag:$rxdogtag_version"
     implementation "com.uber.rxdogtag:rxdogtag-autodispose:$rxdogtag_version"
-
 
     // testing
     androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version", {
